@@ -1,0 +1,61 @@
+:root {
+    --border: rgb(200, 200, 200);
+    --current-page: rgb(200, 200, 200);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.div-numbers {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    all: unset;
+    border: 1px solid var(--border);
+    padding: 10px 15px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.current-page {
+    background-color: var(--current-page);
+}
+
+.content-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    border: 1px solid var(--border);
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
