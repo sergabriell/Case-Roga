@@ -38,3 +38,53 @@ const list = {
         paginatedItems.forEach(list.create)
     }
 }
+
+const controls = {
+    next() {
+        state.page++;
+
+        const lastPage = state.page > state.totalPage;
+        if (lastPage) {
+            state.page--;
+        }
+    },
+    prev() {
+        state.page--;
+
+        if (state.page < 1) {
+            state.page++;
+        }
+    },
+    goTo(page) {
+        if (page < 1) {
+            page = 1;
+        }
+
+        state.page = Number(page);
+
+        if (page > state.totalPage) {
+            state.page = state.totalPage;
+        }
+    },
+    createListeners() {
+        html.get('.first-page').addEventListener('click', () => {
+            controls.goTo(1);
+            update();
+        })
+
+        html.get('.last-page').addEventListener('click', () => {
+            controls.goTo(state.totalPage);
+            update();
+        })
+
+        html.get('.next').addEventListener('click', () => {
+            controls.next();
+            update();
+        })
+
+        html.get('.prev').addEventListener('click', () => {
+            controls.prev();
+            update();
+        })
+    }
+}
