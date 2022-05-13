@@ -176,3 +176,15 @@ const buttons = {
         return { maxLeft, maxRight };
     }
 }
+
+const update = () => {
+    list.update();
+    buttons.update();
+}
+
+const init = () => {
+    update();
+    controls.createListeners();
+}
+
+init();
