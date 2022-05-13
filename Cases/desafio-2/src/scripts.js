@@ -88,3 +88,91 @@ const controls = {
         })
     }
 }
+
+const buttons = {
+    create(number) {
+        const button = document.createElement('button');
+        button.classList.add('numbers');
+
+        button.innerHTML = number;
+
+        if (state.page === number) {
+            button.classList.add('current-page');
+        }
+
+        if (number !== '...') {
+            button.addEventListener('click', (e) => {
+                const page = e.target.innerHTML;
+
+                controls.goTo(page);
+                update();
+            })
+        }
+
+        html.get('.pages .div-numbers').appendChild(button);
+    },
+    update() {
+        html.get('.pages .numbers').innerHTML = '';
+        html.get('.pages .div-numbers').innerHTML = '';
+
+        if (state.maxPages > state.totalPage) {
+            html.get('.first-page').classList.add('hidden');
+            html.get('.last-page').classList.add('hidden');
+            html.get('.prev').classList.add('hidden');
+            html.get('.next').classList.add('hidden');
+        }
+
+        const { maxLeft, maxRight } = buttons.calculateVisible();
+
+        buttons.create(1);
+        for (let page = maxLeft + 1; page <= maxRight - 1; page++) {
+
+            if (state.maxPages === 5 && state.totalPage > 5) {
+                if (state.page > page && state.totalPage > state.maxPages && page > 2) {
+                    if (state.page >= state.totalPage - 1) {
+                        if (page === state.totalPage - 3) {
+                            buttons.create('...');
+                        } else {
+                            buttons.create(page)
+                        }
+                    } else {
+                        buttons.create('...');
+                    }
+                } else {
+                    if (state.page + 1 === page && state.page > 2) {
+                        buttons.create('...');
+                    } else {
+                        if (page > 3 && state.page < 3) {
+                            buttons.create('...');
+                        } else {
+                            buttons.create(page);
+                        }
+                    }
+                }
+            } else {
+                buttons.create(page);
+            }
+        }
+        buttons.create(state.totalPage);
+    },
+    calculateVisible() {
+        let maxLeft = (state.page - Math.floor(state.maxPages / 2))
+        let maxRight = (state.page + Math.floor(state.maxPages / 2))
+
+        if (maxLeft < 1) {
+            maxLeft = 1;
+            maxRight = state.maxPages;
+        }
+
+        if (maxRight > state.totalPage) {
+            maxLeft = state.totalPage - (state.maxPages - 1);
+            maxRight = state.totalPage;
+
+            if (maxLeft < 1) {
+                maxLeft = 1;
+            }
+        }
+
+        return { maxLeft, maxRight };
+    }
+}
