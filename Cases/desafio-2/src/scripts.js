@@ -6,7 +6,7 @@ const html = {
 
 const data = Array.from({ length: 80 }).map((_, i) => `Name: ${(i + 1)}`);
 
-let limit = 4;
+let limit = 10;
 
 const state = {
     page: 1,
