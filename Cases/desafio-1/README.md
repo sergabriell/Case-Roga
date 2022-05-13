@@ -4,12 +4,20 @@
 #### path (Caminho)
 #### data (Objeto)
 
-#### **Exemplo**
-
 ```javascript
 // funcao GET
 
-get('a.b.d[1].e', { a: { b: { c: 1, d: [1, { e: 2 }] } } })
+get(path, data);
+
+```
+
+
+#### **Exemplo**
+
+```javascript
+//GET
+
+get('a.b.d[1].e', { a: { b: { c: 1, d: [1, { e: 2 }] } } });
 
 ```
 
